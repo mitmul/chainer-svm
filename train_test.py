@@ -84,6 +84,19 @@ def visualize(args, X, Y, model, losses, init):
 
     x1 = X[np.where(Y == -1)]
     x2 = X[np.where(Y == 1)]
+    sv_1 = np.argmin(np.abs(W[0] * x1[:, 0] + W[1] * x1[:, 1] + b))
+    sv_2 = np.argmin(np.abs(W[0] * x2[:, 0] + W[1] * x2[:, 1] + b))
+
+    sv_b1 = -W[0] * x1[sv_1, 0] -W[1] * x1[sv_1, 1]
+    x = np.arange(X[:, 0].min(), X[:, 0].max() + 1e-3, 1e-3)
+    y = - W[0] / W[1] * x - sv_b1 / W[1]
+    plt.plot(x, y, 'b--')
+
+    sv_b2 = -W[0] * x2[sv_2, 0] -W[1] * x2[sv_2, 1]
+    x = np.arange(X[:, 0].min(), X[:, 0].max() + 1e-3, 1e-3)
+    y = - W[0] / W[1] * x - sv_b2 / W[1]
+    plt.plot(x, y, 'b--')
+
     plt.scatter(x1[:, 0], x1[:, 1], c='b')
     plt.scatter(x2[:, 0], x2[:, 1], c='r')
     plt.legend()
