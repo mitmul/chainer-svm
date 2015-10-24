@@ -93,9 +93,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', type=str, default=-1)
     parser.add_argument('--c', type=float, default=0.01)
-    parser.add_argument('--lr', type=float, default=0.01)
-    parser.add_argument('--batchsize', type=int, default=1)
-    parser.add_argument('--epoch', type=int, default=100)
+    parser.add_argument('--lr', type=float, default=0.1)
+    parser.add_argument('--batchsize', type=int, default=50)
+    parser.add_argument('--epoch', type=int, default=1000)
     parser.add_argument('--penalty', type=str, default='l1')
     args = parser.parse_args()
 

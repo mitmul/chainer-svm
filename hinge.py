@@ -52,4 +52,24 @@ class Hinge(function.Function):
 
 
 def hinge(x, t, use_cudnn=True):
+    """Computes hinge loss as below:
+
+        .. math::
+            L = \sum_{n=1}^N max(0, 1 - x_n t_n)
+
+        where :math:`N` denotes the batchsize.
+
+    Args:
+        x (~chainer.Variable): Input variable. The shape of ``x`` should be the
+            same as ``t``
+        t (~chainer.Variable): Corresponding labels. The shape of ``t`` should
+            be the same as ``x``
+        use_cudnn (bool): If True and CuDNN is enabled, then this function
+            uses CuDNN as the core implementation.
+
+    Returns:
+        ~chainer.Variable: A variable object holding a scalar array of the
+            hinge loss.
+
+    """
     return Hinge(use_cudnn)(x, t)
