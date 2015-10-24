@@ -15,4 +15,4 @@ $ python train_test.py --gpu 0
 
 ## Result
 
-!(https://raw.githubusercontent.com/wiki/mitmul/chainer-svm/images/data.png)
+![](https://raw.githubusercontent.com/wiki/mitmul/chainer-svm/images/data.png)
