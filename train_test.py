@@ -102,6 +102,8 @@ def visualize(args, X, Y, model, losses, init):
     plt.legend()
     plt.savefig('data.png')
 
+    print sv_b1, sv_b2
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', type=str, default=-1)
