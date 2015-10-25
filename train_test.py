@@ -66,9 +66,10 @@ def train(args, X, Y, model, optimizer):
 def visualize(args, X, Y, model, losses, init):
     W, b = model.fc.W.reshape((2,)), model.fc.b
     W_init, b_init = init
+    W_init = W_init[0]
     if args.gpu >= 0:
         W, b = map(cuda.cupy.asnumpy, [W, b])
-        W_init, b_init = map(cuda.cupy.asnumpy, [W_init[0], b_init])
+        W_init, b_init = map(cuda.cupy.asnumpy, [W_init, b_init])
 
     plt.plot(losses)
     plt.savefig('loss.png')

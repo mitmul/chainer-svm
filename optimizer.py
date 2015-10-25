@@ -26,8 +26,8 @@ class Optimizer(chainer.Optimizer):
                         else if (p < 0) g -= c;
                         ''', 'l1_regularization')(p, c, g)
             else:
-                g[numpy.where(w > 0)] += c
-                g[numpy.where(w < 0)] -= c
+                g[numpy.where(p > 0)] += c
+                g[numpy.where(p < 0)] -= c
 
 
 class SGD(Optimizer):
