@@ -88,12 +88,12 @@ def visualize(args, X, Y, model, losses, init):
     sv_1 = np.argmin(np.abs(W[0] * x1[:, 0] + W[1] * x1[:, 1] + b))
     sv_2 = np.argmin(np.abs(W[0] * x2[:, 0] + W[1] * x2[:, 1] + b))
 
-    sv_b1 = -W[0] * x1[sv_1, 0] -W[1] * x1[sv_1, 1]
+    sv_b1 = -W[0] * x1[sv_1, 0] - W[1] * x1[sv_1, 1]
     x = np.arange(X[:, 0].min(), X[:, 0].max() + 1e-3, 1e-3)
     y = - W[0] / W[1] * x - sv_b1 / W[1]
     plt.plot(x, y, 'b--')
 
-    sv_b2 = -W[0] * x2[sv_2, 0] -W[1] * x2[sv_2, 1]
+    sv_b2 = -W[0] * x2[sv_2, 0] - W[1] * x2[sv_2, 1]
     x = np.arange(X[:, 0].min(), X[:, 0].max() + 1e-3, 1e-3)
     y = - W[0] / W[1] * x - sv_b2 / W[1]
     plt.plot(x, y, 'b--')
@@ -103,7 +103,7 @@ def visualize(args, X, Y, model, losses, init):
     plt.legend()
     plt.savefig('data.png')
 
-    print sv_b1, sv_b2
+    print abs(sv_b1 - b), abs(sv_b2 - b), abs(sv_b1 - b) - abs(sv_b2 - b)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

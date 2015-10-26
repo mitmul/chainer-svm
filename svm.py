@@ -26,11 +26,11 @@ class SVM(chainer.FunctionSet):
         loss = hinge(h, t)
 
         if self.penalty == 'l1':
-            loss += self.c * F.sum(Variable(self.fc.W, volatile=not train))
-            
+            loss += self.c * F.sum(Variable(abs(self.fc.W),
+                                            volatile=not train))
+
         elif self.penalty == 'l2':
-            W = Variable(self.fc.W, volatile=not train)
-            W_T = F.transpose(W, (1, 0))
-            loss += self.c * F.reshape(F.matmul(W, W_T), ())
+            n = Variable(self.fc.W.dot(self.fc.W.T), volatile=not train)
+            loss += self.c * F.reshape(n, ())
 
         return loss
