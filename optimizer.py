@@ -9,7 +9,7 @@ from chainer import cuda
 
 class Optimizer(chainer.Optimizer):
 
-    def l1_regularization(self, c):
+    def l1_regularization(self, c=0.01):
         """Applies L1 regularization to the parameter/gradient pairs.
 
         Args:
@@ -19,12 +19,10 @@ class Optimizer(chainer.Optimizer):
         for p, g, _ in self.tuples[:1]:
             if isinstance(p, cuda.ndarray):
                 with cuda.get_device(p):
-                    cuda.elementwise(
-                        'T p, T c', 'T g',
-                        '''
-                        if (p > 0) g += c;
-                        else if (p < 0) g -= c;
-                        ''', 'l1_regularization')(p, c, g)
+                    g = cuda.elementwise(
+                        'T p, float32 c', 'T g',
+                        'if (p > 0) g += c; else if (p < 0) g -= c;',
+                        'l1_regularization')(p, c, g)
             else:
                 g[numpy.where(p > 0)] += c
                 g[numpy.where(p < 0)] -= c
